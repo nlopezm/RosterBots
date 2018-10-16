@@ -27,7 +27,7 @@ class LeagueController extends FOSRestController {
     public function getLeagueAction($id) {
         if ($league = $this->getDoctrine()->getRepository("AppBundle:League")->find($id))
             return $league;
-        return new Response("", "404");
+        return new Response("", 404);
     }
 
     /**
@@ -41,7 +41,7 @@ class LeagueController extends FOSRestController {
         if ($form->isValid()) {
             $em->persist($league);
             $em->flush();
-            return $league;
+            return $league->getId();
         } else {
             return $form;
         }
@@ -52,11 +52,11 @@ class LeagueController extends FOSRestController {
      */
     public function deleteLeagueAction($id) {
         if (!$league = $this->getDoctrine()->getRepository("AppBundle:League")->find($id))
-            return new Response("", "404");
+            return new Response("", 404);
         $em = $this->getDoctrine()->getManager();
         $em->remove($league);
         $em->flush();
-        return true;
+        return new Response("", 202);
     }
 
     /**
@@ -64,14 +64,14 @@ class LeagueController extends FOSRestController {
      */
     public function updateLeagueAction(Request $request, $id) {
         if (!$league = $this->getDoctrine()->getRepository("AppBundle:League")->find($id))
-            return new Response("", "404");
+            return new Response("", 404);
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(LeagueType::class, $league);
         $form->submit($request->request->all());
         if ($form->isValid()) {
             $em->persist($league);
             $em->flush();
-            return $league;
+            return new Response("", 202);
         } else {
             return $form;
         }
