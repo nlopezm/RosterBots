@@ -1,0 +1,13 @@
+api_leagues:
+    resource: AppBundle\Controller\LeagueController
+    prefix: leagues
+    type: rest
+api_teams:
+    resource: AppBundle\Controller\TeamController
+    prefix: teams
+    type: rest
+api_players:
+    resource: AppBundle\Controller\PlayerController
+    prefix: players
+    type: rest
+
