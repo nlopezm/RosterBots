@@ -28,6 +28,11 @@ class Team extends BaseEntity {
     protected $name;
 
     /**
+     * @ORM\ManyToOne(targetEntity="League", inversedBy="teams")
+     */
+    protected $league;
+
+    /**
      * @ORM\OneToMany(targetEntity="Player", mappedBy="team", cascade={"persist"})
      * @Expose
      * @Groups({"Team"})
@@ -42,8 +47,8 @@ class Team extends BaseEntity {
         return $this->name;
     }
 
-    function getPlayers() {
-        return $this->players;
+    function getLeague() {
+        return $this->league;
     }
 
     function setName($name) {
@@ -51,7 +56,14 @@ class Team extends BaseEntity {
         return $this;
     }
 
+    function setLeague($league) {
+        $this->league = $league;
+        return $this;
+    }
+
     function setPlayers($players) {
+        foreach ($players as $player)
+            $player->setTeam($this);
         $this->players = $players;
         return $this;
     }

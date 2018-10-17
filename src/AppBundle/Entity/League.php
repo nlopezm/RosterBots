@@ -28,14 +28,9 @@ class League extends BaseEntity {
     protected $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Team")
-     * @ORM\JoinTable(name="league_team",
-     *      joinColumns={@ORM\JoinColumn(name="league_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="team_id", referencedColumnName="id")}
-     *  )
-     * @var Collection
+     * @ORM\OneToMany(targetEntity="Team", mappedBy="league", cascade={"persist"})
      * @Expose
-     * @Groups("League")
+     * @Groups({"League"})
      */
     protected $teams;
 
@@ -86,7 +81,7 @@ class League extends BaseEntity {
         return $this;
     }
 
-    function setTeams(Collection $teams) {
+    function setTeams($teams) {
         $this->teams = $teams;
         return $this;
     }

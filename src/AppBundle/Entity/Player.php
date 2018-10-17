@@ -59,6 +59,19 @@ abstract class Player extends BaseEntity {
      */
     protected $agility;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Team", inversedBy="players")
+     */
+    protected $team;
+
+    function __construct($firstName, $lastName, $speed, $strength, $agility) {
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
+        $this->speed = $speed;
+        $this->strength = $strength;
+        $this->agility = $agility;
+    }
+
     function getFirstName() {
         return $this->firstName;
     }
@@ -77,6 +90,10 @@ abstract class Player extends BaseEntity {
 
     function getAgility() {
         return $this->agility;
+    }
+
+    function getTeam() {
+        return $this->team;
     }
 
     function setFirstName($firstName) {
@@ -101,6 +118,11 @@ abstract class Player extends BaseEntity {
 
     function setAgility($agility) {
         $this->agility = $agility;
+        return $this;
+    }
+
+    function setTeam($team) {
+        $this->team = $team;
         return $this;
     }
 

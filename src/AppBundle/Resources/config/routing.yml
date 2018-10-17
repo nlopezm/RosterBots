@@ -4,7 +4,7 @@ api_leagues:
     type: rest
 api_teams:
     resource: AppBundle\Controller\TeamController
-    prefix: teams
+    prefix: leagues/{leagueId}/teams
     type: rest
 api_players:
     resource: AppBundle\Controller\PlayerController
