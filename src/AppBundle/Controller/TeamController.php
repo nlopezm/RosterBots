@@ -41,8 +41,11 @@ class TeamController extends FOSRestController {
         $form->submit($request->request->all());
         if ($form->isValid()) {
             $league = $team->getLeague();
-            $players = $this->container->get('player.service')->generatePlayers($league->getStarterPlayers(), $league->getSubstitutePlayers(), $league->getSalaryCap());
+            $this->getExistingPlayersForLeague($league, $existingNames, $existingUIds);
+            $players = $this->container->get('player.service')->generatePlayers($league->getStarterPlayers(), $league->getSubstitutePlayers(), $league->getSalaryCap(), $existingNames, $existingUIds);
             $team->setPlayers($players);
+            foreach ($players as $player)
+                $player->setTeam($team);
             $em->persist($team);
             $em->flush();
             return $team->getId();
@@ -80,6 +83,20 @@ class TeamController extends FOSRestController {
         } else {
             return $form;
         }
+    }
+
+    private function getExistingPlayersForLeague($league, &$existingNames, &$existingUIds) {
+        $teamIds = array_map(function($team) {
+            return $team->getId();
+        }, $league->getTeams()->toArray());
+        $existingPlayers = $this->getDoctrine()->getRepository("AppBundle:Player")->findBy(array('team' => $teamIds));
+        $existingNames = array();
+        $existingUIds = array();
+        foreach ($existingPlayers as $player) {
+            $existingNames[] = $player->getFullName();
+            $existingUIds[] = $player->getUniqueId();
+        }
+        return true;
     }
 
 }

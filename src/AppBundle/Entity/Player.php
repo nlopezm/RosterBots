@@ -22,6 +22,25 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 abstract class Player extends BaseEntity {
 
+    const FIRST_NAMES = array(
+        'Christopher', 'John', 'James', 'Oliver',
+        'Peter', 'Ryan', 'Emma', 'Isabella',
+        'Michelle', 'Olivia', 'Sarah', 'Susan'
+    );
+    const LAST_NAMES = array(
+        'Anderson', 'Brown', 'Davis', 'Johnson',
+        'Lee', 'Miller', 'Sellers', 'Simpson',
+        'Smith', 'Williams', 'Wilson', 'White',
+    );
+
+    /**
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length = 6)
+     * @Expose
+     * @Groups({"Player"})
+     */
+    protected $uniqueId;
+
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="string", length = 50)
@@ -71,13 +90,18 @@ abstract class Player extends BaseEntity {
      */
     protected $team;
 
-    function __construct($firstName, $lastName, $speed, $strength, $agility, $salary = 0) {
+    function __construct($uniqueId, $firstName, $lastName, $speed, $strength, $agility, $salary) {
+        $this->uniqueId = $uniqueId;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->speed = $speed;
         $this->strength = $strength;
         $this->agility = $agility;
         $this->salary = $salary;
+    }
+
+    function getUniqueId() {
+        return $this->uniqueId;
     }
 
     function getFirstName() {
@@ -106,6 +130,15 @@ abstract class Player extends BaseEntity {
 
     function getTeam() {
         return $this->team;
+    }
+
+    function getFullName() {
+        return $this->firstName . ' ' . $this->lastName;
+    }
+
+    function setUniqueId($uniqueId) {
+        $this->uniqueId = $uniqueId;
+        return $this;
     }
 
     function setFirstName($firstName) {

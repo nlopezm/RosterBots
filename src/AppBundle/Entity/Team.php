@@ -51,6 +51,10 @@ class Team extends BaseEntity {
         return $this->league;
     }
 
+    function getPlayers() {
+        return $this->players;
+    }
+
     function setName($name) {
         $this->name = $name;
         return $this;
@@ -62,8 +66,6 @@ class Team extends BaseEntity {
     }
 
     function setPlayers($players) {
-        foreach ($players as $player)
-            $player->setTeam($this);
         $this->players = $players;
         return $this;
     }
