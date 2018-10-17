@@ -60,16 +60,24 @@ abstract class Player extends BaseEntity {
     protected $agility;
 
     /**
+     * @ORM\Column(type="integer")
+     * @Expose
+     * @Groups({"Player"})
+     */
+    protected $salary;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Team", inversedBy="players")
      */
     protected $team;
 
-    function __construct($firstName, $lastName, $speed, $strength, $agility) {
+    function __construct($firstName, $lastName, $speed, $strength, $agility, $salary = 0) {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->speed = $speed;
         $this->strength = $strength;
         $this->agility = $agility;
+        $this->salary = $salary;
     }
 
     function getFirstName() {
@@ -90,6 +98,10 @@ abstract class Player extends BaseEntity {
 
     function getAgility() {
         return $this->agility;
+    }
+
+    function getSalary() {
+        return $this->salary;
     }
 
     function getTeam() {
@@ -118,6 +130,11 @@ abstract class Player extends BaseEntity {
 
     function setAgility($agility) {
         $this->agility = $agility;
+        return $this;
+    }
+
+    function setSalary($salary) {
+        $this->salary = $salary;
         return $this;
     }
 

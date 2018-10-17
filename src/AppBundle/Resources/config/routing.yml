@@ -8,6 +8,6 @@ api_teams:
     type: rest
 api_players:
     resource: AppBundle\Controller\PlayerController
-    prefix: players
+    prefix: leagues/{leagueId}/teams/{teamId}/players
     type: rest
 
