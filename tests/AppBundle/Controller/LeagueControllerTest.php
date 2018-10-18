@@ -62,4 +62,22 @@ class LeagueControllerTest extends WebTestCase {
         $this->assertEquals(202, $client->getResponse()->getStatusCode());
     }
 
+    public function existsLeagueNameActionForNonExistent() {
+        $client = static::createClient();
+        $crawler = $client->request('HEAD', '/api/leagues?name=Non-existent');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    public function existsLeagueNameActionForExistent() {
+        $client = static::createClient();
+        $crawler = $client->request('HEAD', '/api/leagues?name=Updated test Team');
+        $this->assertEquals(406, $client->getResponse()->getStatusCode());
+    }
+
+    public function existsLeagueNameActionForNoName() {
+        $client = static::createClient();
+        $crawler = $client->request('HEAD', '/api/leagues?');
+        $this->assertEquals(400, $client->getResponse()->getStatusCode());
+    }
+
 }

@@ -9,6 +9,9 @@ use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Put;
+use FOS\RestBundle\Controller\Annotations\Head;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Request\ParamFetcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use \Symfony\Component\HttpFoundation\Response;
 
@@ -75,6 +78,19 @@ class LeagueController extends FOSRestController {
         } else {
             return $form;
         }
+    }
+
+    /**
+     * @QueryParam(name="name")
+     * @Head("")
+     */
+    public function existsLeagueNameAction(ParamFetcherInterface $paramFetcher) {
+        $name = $paramFetcher->get('name');
+        if (!($name && sizeof($name)))
+            return new Response("", 400);
+        if (!$this->getDoctrine()->getRepository("AppBundle:League")->findOneByName($name))
+            return new Response("", 200);
+        return new Response("", 406);
     }
 
 }

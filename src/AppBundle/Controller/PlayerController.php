@@ -9,6 +9,9 @@ use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Put;
+use FOS\RestBundle\Controller\Annotations\Head;
+use FOS\RestBundle\Request\ParamFetcherInterface;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
 use Symfony\Component\HttpFoundation\Request;
 use \Symfony\Component\HttpFoundation\Response;
 
@@ -58,6 +61,27 @@ class PlayerController extends FOSRestController {
         } else {
             return $form;
         }
+    }
+
+    /**
+     * @QueryParam(name="first_name")
+     * @QueryParam(name="last_name")
+     * @Head("")
+     */
+    public function existsFullNameAction(ParamFetcherInterface $paramFetcher, $leagueId) {
+        $teams = $this->getDoctrine()->getRepository("AppBundle:Team")->findByLeague($leagueId);
+        $teamsIds = array_map(function($team) {
+            return $team->getId();
+        }, $teams);
+        $firstName = $paramFetcher->get('first_name');
+        $lastName = $paramFetcher->get('last_name');
+        $bool = $firstName && sizeof($firstName);
+        $bool &= $lastName && sizeof($lastName);
+        if (!$bool)
+            return new Response("", 400);
+        if (!$this->getDoctrine()->getRepository("AppBundle:Player")->findOneBy(array('firstName' => $firstName, 'lastName' => $lastName, 'team' => $teamsIds)))
+            return new Response("", 200);
+        return new Response("", 406);
     }
 
 }

@@ -21,7 +21,7 @@ class League extends BaseEntity {
 
     /**
      * @Assert\NotBlank()
-     * @ORM\Column(type="string", length = 50)
+     * @ORM\Column(type="string", length = 50, unique = true)
      * @Expose
      * @Groups({"League", "Team"})
      */

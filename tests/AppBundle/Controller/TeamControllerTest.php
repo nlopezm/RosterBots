@@ -51,5 +51,23 @@ class TeamControllerTest extends WebTestCase {
         $this->em->flush();
         $this->assertEquals(202, $client->getResponse()->getStatusCode());
     }
+    
+    public function existsTeNameActionForNonExistent() {
+        $client = static::createClient();
+        $crawler = $client->request('HEAD', '/api/leagues/1/teams?name=Non-existent');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    public function existsTeamNameActionForExistent() {
+        $client = static::createClient();
+        $crawler = $client->request('HEAD', '/api/leagues/1/teams?name=Updated test Team');
+        $this->assertEquals(406, $client->getResponse()->getStatusCode());
+    }
+
+    public function existsTeamNameActionForNoName() {
+        $client = static::createClient();
+        $crawler = $client->request('HEAD', '/api/leagues/1/teams?');
+        $this->assertEquals(400, $client->getResponse()->getStatusCode());
+    }
 
 }
