@@ -50,8 +50,7 @@ class PlayerController extends FOSRestController {
             return new Response("", 404);
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(PlayerType::class, $player);
-        $request->request->set('team', $teamId);
-        $form->submit($request->request->all());
+        $form->submit($request->request->all(), false);
         if ($form->isValid()) {
             $em->persist($player);
             $em->flush();

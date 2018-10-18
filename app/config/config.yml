@@ -75,7 +75,6 @@ sensio_framework_extra:
         
 fos_rest:
     param_fetcher_listener: true
-    body_listener: true
     format_listener: true
     disable_csrf_role: null
     view:

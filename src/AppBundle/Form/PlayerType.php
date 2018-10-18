@@ -13,12 +13,6 @@ class PlayerType extends AbstractType {
         $builder
                 ->add('first_name', null, array('constraints' => new NotBlank()))
                 ->add('last_name', null, array('constraints' => new NotBlank()))
-                ->add('speed')
-                ->add('strength')
-                ->add('agility')
-                ->add('salary')
-                ->add('team_id')
-                ->add('type')
         ;
     }
 

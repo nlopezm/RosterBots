@@ -1,3 +1,4 @@
 services:
+    _defaults: { public: true }
     player.service:
             class: AppBundle\Service\PlayerService
