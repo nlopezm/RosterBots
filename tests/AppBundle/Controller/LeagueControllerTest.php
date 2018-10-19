@@ -17,9 +17,9 @@ class LeagueControllerTest extends WebTestCase {
         $client = static::createClient();
         $body = array(
             'name' => 'My test league ' . uniqid(),
-            'starter_players' => 10,
-            'substitute_players' => 5,
-            'salary_cap' => 175,
+            'starterPlayers' => 10,
+            'substitutePlayers' => 5,
+            'salaryCap' => 175,
         );
         $crawler = $client->request('POST', '/api/leagues', $body, array(), array('CONTENT_TYPE' => 'application/json'));
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -42,9 +42,9 @@ class LeagueControllerTest extends WebTestCase {
         $client = static::createClient();
         $body = array(
             'name' => 'My updated test league',
-            'starter_players' => rand(1, 20),
-            'substitute_players' => rand(1, 15),
-            'salary_cap' => rand(150, 300),
+            'starterPlayers' => rand(1, 20),
+            'substitutePlayers' => rand(1, 15),
+            'salaryCap' => rand(150, 300),
         );
         $crawler = $client->request('PUT', '/api/leagues/1', $body, array(), array('CONTENT_TYPE' => 'application/json'));
         $this->assertEquals(202, $client->getResponse()->getStatusCode());

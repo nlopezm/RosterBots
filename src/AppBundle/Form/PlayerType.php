@@ -11,8 +11,8 @@ class PlayerType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add('first_name', null, array('constraints' => new NotBlank()))
-                ->add('last_name', null, array('constraints' => new NotBlank()))
+                ->add('firstName', null, array('constraints' => new NotBlank()))
+                ->add('lastName', null, array('constraints' => new NotBlank()))
         ;
     }
 

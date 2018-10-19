@@ -19,7 +19,8 @@ class TeamType extends AbstractType {
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Team',
-            'csrf_protection' => false
+            'csrf_protection' => false,
+            'allow_extra_fields' => true
         ));
     }
 

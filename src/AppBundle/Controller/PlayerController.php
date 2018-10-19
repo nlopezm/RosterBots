@@ -64,8 +64,8 @@ class PlayerController extends FOSRestController {
     }
 
     /**
-     * @QueryParam(name="first_name")
-     * @QueryParam(name="last_name")
+     * @QueryParam(name="firstName")
+     * @QueryParam(name="lastName")
      * @Head("")
      */
     public function existsFullNameAction(ParamFetcherInterface $paramFetcher, $leagueId) {
@@ -73,8 +73,8 @@ class PlayerController extends FOSRestController {
         $teamsIds = array_map(function($team) {
             return $team->getId();
         }, $teams);
-        $firstName = $paramFetcher->get('first_name');
-        $lastName = $paramFetcher->get('last_name');
+        $firstName = $paramFetcher->get('firstName');
+        $lastName = $paramFetcher->get('lastName');
         $bool = $firstName && sizeof($firstName);
         $bool &= $lastName && sizeof($lastName);
         if (!$bool)

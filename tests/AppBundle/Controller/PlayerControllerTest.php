@@ -27,7 +27,7 @@ class PlayerControllerTest extends WebTestCase {
 
     public function testPutPlayerAction() {
         $client = static::createClient();
-        $body = array('first_name' => 'First name', 'last_name' => 'Last name');
+        $body = array('firstName' => 'First name', 'lastName' => 'Last name');
         $crawler = $client->request('PUT', '/api/leagues/1/teams/1/players/1', $body, array(), array('CONTENT_TYPE' => 'application/json'));
         $this->assertEquals(202, $client->getResponse()->getStatusCode());
     }
@@ -46,13 +46,13 @@ class PlayerControllerTest extends WebTestCase {
 
     public function existsPlayermNameActionForNonExistent() {
         $client = static::createClient();
-        $crawler = $client->request('HEAD', '/api/leagues/1/teams/1/players?first_name=Non&last_name=Existent');
+        $crawler = $client->request('HEAD', '/api/leagues/1/teams/1/players?firstName=Non&lastName=Existent');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
     public function existsPlayerNameActionForExistent() {
         $client = static::createClient();
-        $crawler = $client->request('HEAD', '/api/leagues/1/teams/1/players?first_name=First name&last_name=Last name');
+        $crawler = $client->request('HEAD', '/api/leagues/1/teams/1/players?firstName=First name&lastName=Last name');
         $this->assertEquals(406, $client->getResponse()->getStatusCode());
     }
 
