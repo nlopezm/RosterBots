@@ -90,7 +90,7 @@ abstract class Player extends BaseEntity {
      */
     protected $team;
 
-    function __construct($uniqueId, $firstName, $lastName, $speed, $strength, $agility, $salary) {
+    function __construct($uniqueId = null, $firstName = null, $lastName = null, $speed = null, $strength = null, $agility = null, $salary = null) {
         $this->uniqueId = $uniqueId;
         $this->firstName = $firstName;
         $this->lastName = $lastName;

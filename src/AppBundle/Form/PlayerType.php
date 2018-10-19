@@ -13,13 +13,18 @@ class PlayerType extends AbstractType {
         $builder
                 ->add('firstName', null, array('constraints' => new NotBlank()))
                 ->add('lastName', null, array('constraints' => new NotBlank()))
+                ->add('speed')
+                ->add('strength')
+                ->add('agility')
+                ->add('salary')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Player',
-            'csrf_protection' => false
+            'csrf_protection' => false,
+            'allow_extra_fields' => true
         ));
     }
 
