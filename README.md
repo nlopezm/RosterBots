@@ -1,6 +1,6 @@
 # RosterBotsAPI
 
-## Development server
+## Installation
 
 - Install Composer and PHP
 - Clone the project
