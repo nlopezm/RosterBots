@@ -98,7 +98,7 @@ class PlayerController extends FOSRestController {
             $player = new Starter();
         else
             $player = new Substitute();
-        $player->setUniqueId(substr(uniqid(), -6));
+        $player->setUniqueId(strtoupper(substr(uniqid(), -6)));
         $form = $this->createForm(PlayerType::class, $player);
         $form->submit($request->request->all(), false);
         if ($form->isValid()) {
