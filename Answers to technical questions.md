@@ -1,4 +1,4 @@
-## 1. How long did you spend on the code challenge? What would you add to your solution if you had more time? If you didn't spend much time on the code challenge then use this as an opportunity to explain what you would add.
+### 1. How long did you spend on the code challenge? What would you add to your solution if you had more time? If you didn't spend much time on the code challenge then use this as an opportunity to explain what you would add.
 
 It took me about 10 hours to develop the backend and 15 the front end.
 If I had more time, I would add:
@@ -7,7 +7,7 @@ If I had more time, I would add:
 - Add custom logging
 - Add more unit, functional and end to end test to the frontend.
 
-## 2. What was the most useful feature that was added to the latest version of a language you used? Please include a snippet of code that shows how you've used it.
+### 2. What was the most useful feature that was added to the latest version of a language you used? Please include a snippet of code that shows how you've used it.
 
 I think that two of the most useful features are types and return types declarations, because it 
 facilitates the obtaining of the desired results and make the code easier to read.
@@ -19,13 +19,13 @@ function getFullName() : string {
  }
 ```
 
-## 3. How would you track down a performance issue in production? Have you ever had to do this?
+### 3. How would you track down a performance issue in production? Have you ever had to do this?
 
 I would implement a good logging system to know what the problems are due to. It is desirable to use a tool to audit logs such as Elastic Search, which in addition to allowing us to perform searches, tracking and monitoring, provides metrics that can facilitate decision making.
 Yes, sometimes I have to participate on  track down a performance issue in production.
 
-## 4. Please describe yourself using JSON.
-'''json
+### 4. Please describe yourself using JSON.
+
 {
    "name":"Nahuel",
    "lastname":"López",
@@ -103,4 +103,3 @@ Yes, sometimes I have to participate on  track down a performance issue in produ
       "Learning"
    ]
 }
-'''
