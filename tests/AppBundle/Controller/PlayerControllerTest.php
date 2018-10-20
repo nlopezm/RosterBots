@@ -34,7 +34,7 @@ class PlayerControllerTest extends WebTestCase {
 
     public function testPutPlayerExceedScore() {
         $client = static::createClient();
-        $body = array('firstName' => 'First Name' + uniqid(), 'lastName' => 'Last name',
+        $body = array('firstName' => 'First Name' . uniqid(), 'lastName' => 'Last name',
             'unique_id' => substr(uniqid(), -6), 'speed' => 200, 'strength' => 4, 'agility' => 6, 'salary' => 4);
         $crawler = $client->request('PUT', '/api/leagues/1/teams/1/players/1', $body, array(), array('CONTENT_TYPE' => 'application/json'));
         $this->assertEquals(400, $client->getResponse()->getStatusCode());
@@ -42,7 +42,7 @@ class PlayerControllerTest extends WebTestCase {
 
     public function testPutPlayerExceedSalary() {
         $client = static::createClient();
-        $body = array('firstName' => 'First Name' + uniqid(), 'lastName' => 'Last name',
+        $body = array('firstName' => 'First Name' . uniqid(), 'lastName' => 'Last name',
             'unique_id' => substr(uniqid(), -6), 'speed' => 10, 'strength' => 4, 'agility' => 6, 'salary' => 999999);
         $crawler = $client->request('PUT', '/api/leagues/1/teams/1/players/1', $body, array(), array('CONTENT_TYPE' => 'application/json'));
         $this->assertEquals(409, $client->getResponse()->getStatusCode());
@@ -50,7 +50,7 @@ class PlayerControllerTest extends WebTestCase {
 
     public function testPutPlayerNotUniqueScore() {
         $client = static::createClient();
-        $body = array('firstName' => 'First Name' + uniqid(), 'lastName' => 'Last name',
+        $body = array('firstName' => 'First Name' . uniqid(), 'lastName' => 'Last name',
             'unique_id' => substr(uniqid(), -6), 'speed' => 5, 'strength' => 0, 'agility' => 0, 'salary' => 10);
         $crawler = $client->request('PUT', '/api/leagues/1/teams/1/players/2', $body, array(), array('CONTENT_TYPE' => 'application/json'));
         $this->assertEquals(409, $client->getResponse()->getStatusCode());
@@ -96,7 +96,7 @@ class PlayerControllerTest extends WebTestCase {
 
     public function testPostPlayer() {
         $client = static::createClient();
-        $body = array('firstName' => 'First Name' + uniqid(), 'lastName' => 'Last name',
+        $body = array('firstName' => 'First Name' . uniqid(), 'lastName' => 'Last name',
             'unique_id' => substr(uniqid(), -6), 'speed' => 2, 'strength' => 4, 'agility' => 6, 'salary' => 4);
         $crawler = $client->request('POST', '/api/leagues/1/teams/1/players/' . rand(0, 1), $body, array(), array('CONTENT_TYPE' => 'application/json'));
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -108,7 +108,7 @@ class PlayerControllerTest extends WebTestCase {
 
     public function testPostPlayerExceedScore() {
         $client = static::createClient();
-        $body = array('firstName' => 'First Name' + uniqid(), 'lastName' => 'Last name',
+        $body = array('firstName' => 'First Name' . uniqid(), 'lastName' => 'Last name',
             'unique_id' => substr(uniqid(), -6), 'speed' => 200, 'strength' => 4, 'agility' => 6, 'salary' => 4);
         $crawler = $client->request('POST', '/api/leagues/1/teams/1/players/' . rand(0, 1), $body, array(), array('CONTENT_TYPE' => 'application/json'));
         $this->assertEquals(400, $client->getResponse()->getStatusCode());
@@ -116,7 +116,7 @@ class PlayerControllerTest extends WebTestCase {
 
     public function testPostPlayerExceedSalary() {
         $client = static::createClient();
-        $body = array('firstName' => 'First Name' + uniqid(), 'lastName' => 'Last name',
+        $body = array('firstName' => 'First Name' . uniqid(), 'lastName' => 'Last name',
             'unique_id' => substr(uniqid(), -6), 'speed' => 10, 'strength' => 4, 'agility' => 6, 'salary' => 999999);
         $crawler = $client->request('POST', '/api/leagues/1/teams/1/players/' . rand(0, 1), $body, array(), array('CONTENT_TYPE' => 'application/json'));
         $this->assertEquals(409, $client->getResponse()->getStatusCode());
@@ -124,7 +124,7 @@ class PlayerControllerTest extends WebTestCase {
 
     public function testPostPlayerNotUniqueScore() {
         $client = static::createClient();
-        $body = array('firstName' => 'First Name' + uniqid(), 'lastName' => 'Last name',
+        $body = array('firstName' => 'First Name' . uniqid(), 'lastName' => 'Last name',
             'unique_id' => substr(uniqid(), -6), 'speed' => 5, 'strength' => 0, 'agility' => 0, 'salary' => 10);
         $crawler = $client->request('POST', '/api/leagues/1/teams/1/players/' . rand(0, 1), $body, array(), array('CONTENT_TYPE' => 'application/json'));
         $this->assertEquals(409, $client->getResponse()->getStatusCode());
