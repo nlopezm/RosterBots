@@ -50,7 +50,7 @@ class PlayerControllerTest extends WebTestCase {
 
     public function testPutPlayerNotUniqueScore() {
         $client = static::createClient();
-        $body = array('firstName' => 'First Name' . uniqid(), 'lastName' => 'Last name',
+        $body = array('firstName' => 'First Name' .uniqid(), 'lastName' => 'Last name',
             'unique_id' => substr(uniqid(), -6), 'speed' => 5, 'strength' => 0, 'agility' => 0, 'salary' => 10);
         $crawler = $client->request('PUT', '/api/leagues/1/teams/1/players/2', $body, array(), array('CONTENT_TYPE' => 'application/json'));
         $this->assertEquals(409, $client->getResponse()->getStatusCode());
